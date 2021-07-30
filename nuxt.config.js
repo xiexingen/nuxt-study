@@ -6,7 +6,8 @@ export default {
     titleTemplate: '%s - nuxt-sudy',
     title: 'nuxt-sudy',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
+      xxg:'xxg'
     },
     meta: [
       { charset: 'utf-8' },
@@ -44,7 +45,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
