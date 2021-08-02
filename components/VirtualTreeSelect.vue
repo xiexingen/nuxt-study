@@ -89,7 +89,6 @@ export default {
   },
   computed: {
     flattenTree() {
-      debugger
       const flatten = (
         tree,
         list = [],
@@ -119,8 +118,7 @@ export default {
         }
         return list;
       };
-      const result= flatten(this.tree);
-      return result;
+      return flatten(this.tree);
     }
   },
   mounted() {
@@ -131,6 +129,7 @@ export default {
   methods: {
     // 处理滚动
     handleScroll() {
+      debugger
       // 如果当前滚动元素不是当前组件，则需要传入scrollDom
       if (this.option.scrollDom) {
         const scrollTop = this.option.scrollDom.scrollTop;
@@ -146,6 +145,7 @@ export default {
     },
     // 更新可视数据
     updateVisibleData(scrollTop = 0) {
+      debugger
       console.log(scrollTop);
       const that = this;
       const visibleHeight = this.option.visibleHeight
@@ -161,6 +161,7 @@ export default {
       that.visibleData = allVisibleData.slice(start, end);
       that.offset = start * that.option.itemHeight;
       this.$nextTick(() => {
+        debugger
         // 避免动画渲染问题
         that.$emit("update-visible-data", {
           visibleData: that.visibleData,
@@ -170,12 +171,14 @@ export default {
     },
     // 更新容器高度
     updateContentHeight() {
+      debugger
       this.contentHeight =
         (this.flattenTree || []).filter(item => item.visible).length *
         this.option.itemHeight;
     },
     // 窗口变化，需要做的处理
     resize(duration) {
+      debugger
       if (!this.timer) {
         // 避免频繁触发
         this.timer = true;
@@ -189,6 +192,7 @@ export default {
     },
     // 强制刷新
     updateView() {
+      debugger
       const that = this;
       this.updateContentHeight();
       this.$emit("update", this.tree);
@@ -198,6 +202,7 @@ export default {
     },
     // 点击节点
     nodeClick(item) {
+      debugger
       const recursionSelect = function(children, value) {
         children &&
           children.forEach(node => {
@@ -212,6 +217,7 @@ export default {
     },
     // 展开全部
     toggleExpandAll(state, level = 1) {
+      debugger
       const that = this;
       let expandNodes = []; // 待展开/折叠的节点
       let rootNodes = []; // 父级节点（直到根节点）
@@ -240,6 +246,7 @@ export default {
     },
     // 切换节点展开/折叠
     toggleExpand(e, item, index) {
+      debugger
       e && e.stopPropagation();
       const isExpand = item.expand;
       if (isExpand) {
@@ -252,6 +259,7 @@ export default {
     },
     // 展开节点
     expand(item, isKeep = true) {
+      debugger
       const recursionVisible = function(children) {
         children.forEach(node => {
           if (!isKeep) {
@@ -275,6 +283,7 @@ export default {
     },
     // 折叠节点
     collapse(item, isKeep = true) {
+      debugger
       const recursionVisible = function(children) {
         children.forEach(node => {
           if (!isKeep) {
@@ -292,6 +301,7 @@ export default {
     /** 对树节点的操作 **/
     // 添加子节点
     append(item, parent) {
+      debugger
       if (!parent.children) {
         this.$set(parent, "children", []);
       }
@@ -300,12 +310,14 @@ export default {
     },
     // 添加兄弟节点
     insertAfter(item, node, isUpdate = true) {
+      debugger
       const index = node.parent.children.indexOf(node);
       node.parent.children.splice(index + 1, 0, item);
       isUpdate && this.updateView();
     },
     // 删除节点
     remove(item) {
+      debugger
       if (item.parent) {
         const index = item.parent.children.indexOf(item);
         item.parent.children.splice(index, 1);

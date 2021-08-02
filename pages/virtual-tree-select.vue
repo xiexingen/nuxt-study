@@ -1,7 +1,7 @@
 <template>
   <div class="virtual-tree-demo">
     <v-btn color="primary" @click="toggleExpandAll">(展开/折叠)全部</v-btn>
-    <VirtualTreeSelect
+    <!-- <VirtualTreeSelect
       ref="vtree"
       class="vtree"
       v-model="tree"
@@ -13,11 +13,13 @@
         {{ item.name }}
         <i class="el-icon-delete" @click.stop="handleDelete(item)" />
       </template>
-    </VirtualTreeSelect>
+    </VirtualTreeSelect> -->
+    <tree-select :items="tree" :defaultExpandAll="false"></tree-select>
   </div>
 </template>
 
 <script>
+import TreeSelect from '../components/TreeSelect.vue';
 function generateLevel(level) {
   return {
     id:`${level}`,
@@ -38,6 +40,7 @@ function generateLevel(level) {
   };
 }
 export default {
+  components: { TreeSelect },
   data() {
     return {
       tree: Array.from({ length: 10 }, (v, index) => generateLevel(index)),
